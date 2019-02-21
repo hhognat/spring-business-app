@@ -21,14 +21,17 @@ import com.vaadin.flow.router.RouterLink;
 
 import java.util.Set;
 
+
 @Route(value = "users", layout = MainLayout.class)
 public class UsersView extends Composite<VerticalLayout> {
 
     private TextField name = new TextField();
+    @SuppressWarnings("unchecked")
     private ComboBox<Role> role = new ComboBox();
+    @SuppressWarnings("unchecked")
     private Grid<User> grid = new Grid();
 
-    private final UserService userService;
+    private final transient UserService userService;
 
     public UsersView(UserService userService) {
         this.userService = userService;
@@ -46,7 +49,7 @@ public class UsersView extends Composite<VerticalLayout> {
 
         role.setPlaceholder(Messages.get("com.example.issues.role"));
         role.setItems(Role.values());
-        role.setItemLabelGenerator(role -> Messages.get(role.getNameProperty()));
+        role.setItemLabelGenerator(aRole -> Messages.get(aRole.getNameProperty()));
         role.addValueChangeListener(e -> refreshGrid());
 
         RouterLink createNew = new RouterLink(Messages.get("com.example.issues.create"), CreateUserView.class);
