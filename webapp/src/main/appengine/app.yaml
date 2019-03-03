@@ -26,5 +26,23 @@ handlers:
 - url: /.*
   script: this field is required, but ignored
 
+#beta_settings:
+#  java_quickstart: true
+
+#automatic_scaling:
+#  min_idle_instances: automatic
+#  max_idle_instances: automatic
+#  min_pending_latency: automatic
+#  max_pending_latency: automatic
+
 manual_scaling:
   instances: 1
+
+resources:
+  cpu: 8
+  memory_gb: 16
+  disk_size_gb: 10
+  volumes:
+    - name: ramdisk1
+      volume_type: tmpfs
+      size_gb: 0.5
